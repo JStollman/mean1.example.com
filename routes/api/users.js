@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
 
 /*Get a single user*/
 router.get('/:userId', function(req, res, next){
-  console.log('lol');
+  
   var userId = req.params.userId;
 
   User.findOne({'_id':userId}, function(err, user){
@@ -96,5 +96,37 @@ router.delete('/:userId', function(req,res,next){
     return res.json({success:true, status: removed});
   });
 })
+
+//Register a new user
+router.post('/register', function(req, res, nexter){
+  var data = req.body;
+
+  User.register(new User({
+    username: data.username,
+    email: data.email,
+    first_name: data.first_name,
+    last_name: data.last_name
+  }), 
+  data.password, 
+  function(err, user){
+    if(err){
+
+      return res.json({
+        success: false,
+        user: req.body,
+        errors: err
+      });
+
+    }
+        
+      return res.json({
+          success: true,
+          user: user
+      })
+  }
+
+);
+
+});
 
 module.exports = router;

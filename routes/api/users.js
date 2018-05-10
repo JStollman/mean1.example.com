@@ -2,7 +2,15 @@ var express = require('express');
 var router = express.Router();
 var User = require('../../models/user');
 
+var bodyParser = require('body-parser');
+
+router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({
+  extended: false
+}));
+
 /* GET users listing. */
+
 router.get('/', function(req, res, next) {
   User.find({}, function(err, users){
     if(err){
@@ -23,7 +31,7 @@ router.get('/:userId', function(req, res, next){
         return res.json({'success':false, 'error':err});
       }
   
-      return res.json({'success':true, 'users':user});  
+      return res.json({'success':true, 'user':user});  
   });
 
 });

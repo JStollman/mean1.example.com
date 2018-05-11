@@ -30,6 +30,7 @@ function viewIndex(){
                     <th>Name</th>
                     <th>Username</th>
                     <th>Email</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>${rows}</tbody>
@@ -59,10 +60,11 @@ function viewUser(id){
                     <tr><th><td>${user.last_name}</td></th></tr>
                     <tr><th><td>${user.username}</td></th></tr>
                     <tr><th><td>${user.email}</td></th></tr>
+                    <tr><th><td></td></th></tr>
                 </tbody>
             </table>
             
-            <h3>Edit the User Record</h3>
+            <h3>Edit/Delete the User Record</h3>
             <form id="editUser" action="/api/users" method="put">
                 <input type="hidden" name="_id" value="${user._id}">
                 <div>
@@ -99,7 +101,10 @@ function viewUser(id){
                 </div>
 
                 <input type="submit" value="Submit">
+
+                <button id="deleteUser">Delete</button>
             </form>
+
             `;
 
         var editUser = document.getElementById('editUser')
@@ -128,6 +133,23 @@ function viewUser(id){
             }
         });
 
+
+        var deleteUser = document.getElementById('deleteUser')
+        deleteUser.addEventListener('click', function(e){
+            e.preventDefault();
+            var url = 'http://localhost:3000/api/users/' + user._id;
+            var xhr = new XMLHttpRequest();
+            xhr.open('Delete', url);
+           
+            xhr.send();
+            console.log(1);
+            xhr.onload = function(){console.log(xhr.response);
+                let data = JSON.parse(xhr.response);
+                if(data.success===true){
+                    viewIndex();
+                }
+            }
+        });
     }
 }
 function createUser(){
@@ -203,12 +225,22 @@ var hash = window.location.hash.substr(1);
 if(hash){
     let chunks = hash.split('-');
 
-    if(chunks[0]=='edit'){
-        viewUser(chunks[1])
-    }
+    switch(chunks[0]){
+        case 'edit':
+            viewUser(chunks[1]);
+        break;
 
-    if(chunks[0]=='createUser'){
-        createUser();
+        case'createUser':
+            createUser();
+        break;
+
+        default:
+            viewIndex();
+        break;
+    
     }
+}else{
+    viewIndex();    
 }
+
 

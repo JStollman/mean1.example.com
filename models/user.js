@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 var uniqueValidator = require('mongoose-unique-validator');
 var passportLocalMongoose = require('passport-local-mongoose');
 
-//Creat a schema
+//Create a schema
 var User = new Schema({
     email: {
         type: String,

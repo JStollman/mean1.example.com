@@ -36,6 +36,8 @@ router.get('/:userId', function(req, res, next){
 
 });
 
+
+
 /* Create/POST a user*/
 router.post('/', function(req, res, next) {
   User.create(new User({
@@ -52,6 +54,8 @@ router.post('/', function(req, res, next) {
     return res.json({'success':true, 'users':users});
   });
 });
+
+
 
 //Update a user
 router.put('/', function(req,res,next){

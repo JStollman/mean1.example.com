@@ -1,5 +1,5 @@
 function viewIndex(){
-    var url = 'http://localhost:3000/api/users';
+    var url = 'http://loc.mean.example.com/api/users';
 
     var xhr = new XMLHttpRequest();
     xhr.open('Get', url);
@@ -40,7 +40,7 @@ function viewIndex(){
     
 }
 function viewUser(id){
-    var url = 'http://localhost:3000/api/users/' + id;
+    var url = 'http://loc.mean.example.com/api/users/' + id;
 
     var xhr = new XMLHttpRequest();
     xhr.open('GET', url);
@@ -111,7 +111,7 @@ function viewUser(id){
         editUser.addEventListener('submit', function(e){
             e.preventDefault();
             var formData = new FormData(editUser);
-            var url = 'http://localhost:3000/api/users';
+            var url = 'http://loc.mean.example.com/api/users';
             var xhr = new XMLHttpRequest();
             xhr.open('Put', url);
             xhr.setRequestHeader(
@@ -137,7 +137,7 @@ function viewUser(id){
         var deleteUser = document.getElementById('deleteUser')
         deleteUser.addEventListener('click', function(e){
             e.preventDefault();
-            var url = 'http://localhost:3000/api/users/' + user._id;
+            var url = 'http://loc.mean.example.com/api/users/' + user._id;
             var xhr = new XMLHttpRequest();
             xhr.open('Delete', url);
            
@@ -194,7 +194,7 @@ function createUser(){
         e.preventDefault();
 
         var formData = new FormData(createUser);
-        var url = 'http://localhost:3000/api/users';
+        var url = 'http://loc.mean.example.com/api/users';
         var xhr = new XMLHttpRequest();
         xhr.open('Post', url);
 

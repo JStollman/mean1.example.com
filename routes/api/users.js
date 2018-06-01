@@ -25,7 +25,6 @@ router.get('/', function(req, res, next) {
 router.get('/:userId', function(req, res, next){
   
   var userId = req.params.userId;
-
   User.findOne({'_id':userId}, function(err, user){
     if(err){
         return res.json({'success':false, 'error':err});
@@ -45,13 +44,13 @@ router.post('/', function(req, res, next) {
     email: req.body.email,
     first_name: req.body.first_name,
     last_name: req.body.last_name,
-  }), function(err, users){
+  }), function(err, user){
     
     if(err){
       return res.json({'success':false, user: req.body, 'error':err});
   }
 
-    return res.json({'success':true, 'users':users});
+    return res.json({'success':true, 'user':user});
   });
 });
 

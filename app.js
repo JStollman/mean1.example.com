@@ -27,8 +27,7 @@ app.use(helmet());
 if(process.env.NODE_ENV==='production'){
   var config = require('../config.prod');
 }else{
-  //var config = require('./config.dev');
-  var config = require('../config.prod');
+  var config = require('./config.dev');
 }
 
 var passport = require('passport');
@@ -102,7 +101,9 @@ app.use(function(req, res, next){
     '/',
     '/favicon.ico',
     '/users/login',
-    '/users/register'
+    '/users/register',
+    '/api/users/register',
+    '/articles'
   ];
 
   if(whitelist.indexOf(req.url) !== -1){
@@ -113,6 +114,7 @@ app.use(function(req, res, next){
   var subs = [
     '/stylesheets/',
     '/src/',
+    '/articles/'
   ];
 
   for(var sub of subs){
